@@ -1,0 +1,27 @@
+<%= form_with(url: websites_create_path) do |form| %>
+  <% if website.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(website.errors.count, "error") %> prohibited this website from being saved:</h2>
+
+      <ul>
+      <% website.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :created_on %>
+    <%= form.date_select :created_on %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
