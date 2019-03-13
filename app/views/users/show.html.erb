@@ -1,0 +1,57 @@
+<style type="text/css">
+	.users_form{
+		width: 600px;
+		margin: 100px auto;
+	}
+	#user_form_male_name {
+    position: absolute;
+    width: 20%;
+    height: 10%;
+    top: 100px;
+    left: 150px;    
+    background-color: turquoise;
+    z-index: 400;
+}
+#user_form_female_name{
+	position: absolute;
+    width: 20%;
+    height: 10%;
+    top: 100px;
+    left: 800px;    
+    background-color: turquoise;
+    z-index: 400;
+}
+</style>
+<div class="users_form">
+	<div class="row text-center" id="user_form_male_name" user_form_male_name>
+		<!-- <div class="col-md-3 col-xs-3"><label>Male Name:</label></div> -->
+		
+		<div style="margin-top: 15px;"><%= @male_name %></div>
+		<!-- <div class="col-md-3 col-xs-3"></div> -->
+	</div>
+	<br/>
+	<div class="row text-center" id="user_form_female_name">
+		<!-- <div class="col-md-3 col-xs-3"><label>Female Name:</label></div> -->
+		<div style="margin-top: 15px;"><%= @female_name %></div>
+		<!-- <div class="col-md-3 col-xs-3"><%#= @female_name  %></div> -->
+	</div>
+	<br/>
+	<div class="row text-center">
+		<div class="col-md-3 col-xs-3"><!-- <label>Relationship</label> --></div>
+		<div class="col-md-3 col-xs-3"><h3 style="font-family: 'initial'"><%= @display_str %></h3></div>		
+	</div>
+	<br/>
+	
+
+	<marquee><strong><%= link_to "click me to verify others names", "/users/new", method: :get %></strong></marquee>
+
+
+</div>
+
+<div class="row" align="center">
+	<%= @display_image.html_safe %>
+</div>
+<br/>
+<div class="row text-center" style="padding: 20px;">		
+	<strong><%= link_to "click here to check for others", "/users/new", method: :get %></strong>
+</div>

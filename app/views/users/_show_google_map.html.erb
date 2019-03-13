@@ -1,0 +1,73 @@
+<style>
+  #map {
+    height: 540px;
+    width: 100%;
+    border: 1px solid lightgrey;
+   }
+</style>   
+<div id="map" style="display: none;"></div>
+<script type="text/javascript">
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    }
+  }
+
+  function showPosition(position) {
+    console.log(position.coords.latitude+", "+position.coords.longitude);
+    $("#latitude").val(position.coords.latitude);
+    $("#logitude").val(position.coords.longitude);
+  }
+
+  function showError(error) {
+    switch(error.code) {
+      case error.PERMISSION_DENIED:
+        alert("User denied the request for Geolocation.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        alert("Location information is unavailable.");
+        break;
+      case error.TIMEOUT:
+        alert("The request to get user location timed out.");
+        break;
+      case error.UNKNOWN_ERROR:
+        alert("An unknown error occurred.");
+        break;
+    }
+  }
+
+
+  function save_cordinates()
+  {
+   var latitude =  $("#latitude").val();
+   var logitude = $("#logitude").val(); 
+   if(latitude != "" && logitude != "")
+   {
+    $.ajax({
+      url: "/users/show_address",
+      type: "GET",
+      data: {"latitude": latitude, "logitude": logitude},
+      success: function (response) {
+        jQuery("#show_address").html(response.address);      
+        jQuery("#address").html(response.address);   
+      }
+    }); 
+   }
+  }
+
+
+
+  function initMap() {
+    var a =  parseFloat($("#latitude").val());
+    var b =  parseFloat($("#logitude").val());
+    // The location of Uluru
+    var lat_long_hash = {lat: a, lng: b};
+    // The map, centered at Uluru
+    var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 16, center: lat_long_hash});
+    // The marker, positioned at Uluru
+    var marker = new google.maps.Marker({position: lat_long_hash, map: map, title: ""});
+  }
+
+  setTimeout(function(){ getLocation();save_cordinates(); }, 1000);
+</script>

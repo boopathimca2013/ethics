@@ -40,7 +40,7 @@ set :repo_url, "git@github.com:boopathimca2013/ethics.git"
 
 
 #set :repo_url, 'git@github.com:devdatta/contactbook.git' # Edit this to match your repository
-set :branch, :dec_16
+set :branch, :mar2019
 set :deploy_to, '/home/deploy/ethics'
 set :pty, true
 set :linked_files, %w{config/database.yml config/application.yml}

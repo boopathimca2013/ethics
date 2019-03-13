@@ -1,0 +1,48 @@
+<style type="text/css">
+	.users_form{
+		width: 600px;
+		margin: 150px auto;
+	}
+</style>
+<marquee direction="right"><h2><div class="row text-center" id="show_address"></div></h2></marquee>
+<div class="users_form">
+<div class="row" align="center"><h2><label>Test your Flames</label></h2></div>
+<br/>
+<%#= form_tag({:controller => "users", :action => "create"}, :method => :post, :onsubmit => 'return restrict_empty_fields()') do %>
+<%= form_tag({:controller => "users", :action => "create"}, :method => :post, :onsubmit => "") do %>
+<div class="row">
+	<div class="col-md-3 col-xs-3"><label>Male:</label></div>
+	<div class="col-md-3 col-xs-3"><%= text_field_tag "male_name", "", :autocomplete => :off, :pattern => /\A[a-zA-Z ]*\z/, :class => "form-control" %></div>
+</div>
+<br/>
+<div class="row">
+	<div class="col-md-3 col-xs-3"><label>Female:</label></div>
+	<div class="col-md-3 col-xs-3"><%= text_field_tag "female_name", "", :autocomplete => :off, :pattern => /\A[a-zA-Z ]*\z/, :class => "form-control" %></div>
+</div>
+<br/>
+<%= hidden_field_tag "address" %>
+<%= hidden_field_tag "latitude", "" %>
+<%= hidden_field_tag "logitude", "" %>
+
+<div class="row text-center">
+	<div class="col-md-5 col-xs-5"><%= submit_tag "Click" %></div>	
+</div>
+
+<% end %>
+<%= render partial: "show_google_map"%>
+</div>
+<script type="text/javascript">
+	function restrict_empty_fields(){
+		if($("#male_name").val() == "" || $("#female_name").val() == ""){
+			alert("Please enter both fields");
+			return false;
+		}
+		else if($("#male_name").val().length > 50 || $("#female_name").val().length > 50){
+			alert("Invalid Input");
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+</script>

@@ -7,9 +7,14 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   </head>
-
-  <body>
-    <%= yield %>
+  <body style="background-color:rgb(252, 156, 249);">  
+  <%= yield %>
+  <script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCslHVRBnENImxZ_mJGNWNVjw988ftzD8M&callback=initMap">
+</script>
   </body>
 </html>

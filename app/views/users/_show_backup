@@ -1,0 +1,78 @@
+<style>
+  #map {
+    height: 540px;
+    width: 100%;
+    border: 1px solid lightgrey;
+   }
+</style>   
+<div id="map"></div>
+
+
+<script type="text/javascript">
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  }
+}
+
+function showPosition(position) {
+  $("#latitude").val(position.coords.latitude);
+  $("#logitude").val(position.coords.longitude);  
+}
+
+function showError(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      alert("User denied the request for Geolocation.");
+      break;
+    case error.POSITION_UNAVAILABLE:
+      alert("Location information is unavailable.");
+      break;
+    case error.TIMEOUT:
+      alert("The request to get user location timed out.");
+      break;
+    case error.UNKNOWN_ERROR:
+      alert("An unknown error occurred.");
+      break;
+  }
+}
+  getLocation();
+  // Initialize and add the map
+  function initMap() {
+  var a =  parseFloat($("#lat").val());
+  var b =  parseFloat($("#long").val());
+  // The location of Uluru
+  var boarding_point = {lat: a, lng: b};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+    document.getElementById('map'), {zoom: 16, center: boarding_point});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: boarding_point, map: map, title: "this is our"});
+  }
+  
+  setTimeout(function(){ initMap(); }, 1000);
+  setTimeout(function(){ save_cordinates(); }, 2000);
+
+function save_cordinates()
+{  
+ var latitude =  $("#latitude").val();
+ var logitude = $("#logitude").val(); 
+ if(latitude != "" && logitude != "")
+ {
+  $.ajax({
+    url: "/users/show_address",
+    type: "GET",
+    data: {"latitude": latitude, "logitude": logitude},
+    success: function (response) {
+      jQuery("#show_address").html(response.address);      
+      jQuery("#address").html(response.address);   
+    }
+  }); 
+ }
+}
+</script>
+
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCslHVRBnENImxZ_mJGNWNVjw988ftzD8M&callback=initMap">
+</script>
+
