@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 			create_flag = true
 		end
 		if create_flag
-			redirect_to("/users/show?male_name=#{CommonUtils.encryption(male_name)}&female_name=#{CommonUtils.encryption(female_name)}") and return;
+			redirect_to("/users/show/#{CommonUtils.encryption(male_name)}/#{CommonUtils.encryption(female_name)}") and return;
 		else
 			render plain: "Please fill Both Fields"
 		end

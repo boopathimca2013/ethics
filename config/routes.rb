@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   get 'users/index' => 'users/index'
   get 'users/new' => 'users/new'
   post 'users/create' => 'users/create'
-  get 'users/show' => 'users/show'  
   get 'users/show_address' => 'users/show_address'
+
+  #get '/users/show' => 'users/show'
+  match "/users/show/:male_name/:female_name", :to=> "users#show", via: [:get]
 
   root 'users#new'
 end
